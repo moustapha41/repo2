@@ -3,10 +3,7 @@ pipeline {
 
   environment {
     // À personnaliser dans Jenkins (ou remplacer ici)
-    DEPLOY_USER = ''                // utilisateur SSH sur le VPS
-    DEPLOY_HOST = ''  // adresse IP ou hostname du VPS
     DEPLOY_PATH = '/var/www/monsite'    // dossier cible sur le VPS
-    SSH_CREDENTIALS = ''         // ID des credentials (SSH) dans Jenkins
   }
 
   options {
@@ -62,16 +59,11 @@ pipeline {
     }
 
     stage('Deploy to VPS') {
-      steps {
-        // Utilise le plugin SSH Agent (credentials type "SSH Username with private key")
-        // Crée un credential Jenkins avec l'id DEPLOY_SSH (ici 'vps-ssh'), puis met la clé privée.
-        sshagent (credentials: [env.SSH_CREDENTIALS]) {
-          sh """
-            echo "Déploiement vers ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
-            rsync -avz --delete --exclude '.git' ./ ${DEPLOY_PATH}
-          """
-        }
-      }
+    steps {
+        sh """
+        echo "Déploiement local vers ${DEPLOY_PATH}"
+        rsync -avz --delete --exclude '.git' ./ ${DEPLOY_PATH}
+        """
     }
   }
 
