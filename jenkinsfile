@@ -3,10 +3,10 @@ pipeline {
 
   environment {
     // À personnaliser dans Jenkins (ou remplacer ici)
-    DEPLOY_USER = 'alumni'                // utilisateur SSH sur le VPS
-    DEPLOY_HOST = '4.251.192.76'  // adresse IP ou hostname du VPS
-    DEPLOY_PATH = '/var/www/tonsite'    // dossier cible sur le VPS
-    SSH_CREDENTIALS = 'vps-ssh'         // ID des credentials (SSH) dans Jenkins
+    DEPLOY_USER = ''                // utilisateur SSH sur le VPS
+    DEPLOY_HOST = ''  // adresse IP ou hostname du VPS
+    DEPLOY_PATH = '/var/www/monsite'    // dossier cible sur le VPS
+    SSH_CREDENTIALS = ''         // ID des credentials (SSH) dans Jenkins
   }
 
   options {
@@ -68,7 +68,7 @@ pipeline {
         sshagent (credentials: [env.SSH_CREDENTIALS]) {
           sh """
             echo "Déploiement vers ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
-            rsync -avz --delete --exclude '.git' ./ ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}
+            rsync -avz --delete --exclude '.git' ./ ${DEPLOY_PATH}
           """
         }
       }
