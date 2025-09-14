@@ -3,8 +3,8 @@ pipeline {
 
   environment {
     // À personnaliser dans Jenkins (ou remplacer ici)
-    DEPLOY_USER = 'root'                // utilisateur SSH sur le VPS
-    DEPLOY_HOST = 'VPS_IP_OU_HOSTNAME'  // adresse IP ou hostname du VPS
+    DEPLOY_USER = 'alumni'                // utilisateur SSH sur le VPS
+    DEPLOY_HOST = '4.251.192.76'  // adresse IP ou hostname du VPS
     DEPLOY_PATH = '/var/www/tonsite'    // dossier cible sur le VPS
     SSH_CREDENTIALS = 'vps-ssh'         // ID des credentials (SSH) dans Jenkins
   }
